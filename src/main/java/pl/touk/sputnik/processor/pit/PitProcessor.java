@@ -29,6 +29,7 @@ class PitProcessor extends ProcessorRunningExternalProcess {
     @Override
     public ExternalProcessResultParser getParser() {
         return pitResultParser;
+    }
 
     @Override
     public String processFileAndDumpOutput(File fileToReview) {

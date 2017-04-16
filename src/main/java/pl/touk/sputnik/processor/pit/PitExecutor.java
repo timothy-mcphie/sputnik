@@ -16,7 +16,7 @@ class PitExecutor {
 
     private String pitFilter;
 
-    public PylintExecutor(@Nullable String pitFilter) {
+    public PitExecutor(@Nullable String pitFilter) {
         this.pitFilter = pitFilter;
     }
 
