@@ -6,9 +6,12 @@ import pl.touk.sputnik.configuration.Configuration;
 import pl.touk.sputnik.configuration.GeneralOption;
 import pl.touk.sputnik.processor.tools.externalprocess.ExternalProcessResultParser;
 import pl.touk.sputnik.processor.tools.externalprocess.ProcessorRunningExternalProcess;
+import pl.touk.sputnik.review.filter.FileFilter;
+import pl.touk.sputnik.review.filter.PythonFilter;
 
 import java.io.File;
 
+@Slf4j
 class PitProcessor extends ProcessorRunningExternalProcess {
 
 
@@ -24,6 +27,11 @@ class PitProcessor extends ProcessorRunningExternalProcess {
     @Override
     public String getName() {
         return "Pit";
+    }
+
+    @Override
+    public FileFilter getReviewFileFilter() {
+        return new PythonFilter();
     }
 
     @Override
