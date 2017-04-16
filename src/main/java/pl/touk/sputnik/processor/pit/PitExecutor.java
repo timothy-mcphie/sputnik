@@ -26,7 +26,7 @@ class PitExecutor {
 
     @NotNull
     private String[] buildParams() {
-        List<String> basicPitArgs = ImmutableList.of(
+        List<String> basicPitArgs = ImmutableList.of("python", 
                 PIT_EXECUTABLE
                 );
         List<String> rcfileNameArg = getRcfileNameAsList();
