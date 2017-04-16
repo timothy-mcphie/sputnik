@@ -23,9 +23,8 @@ class PitResultParser implements ExternalProcessResultParser {
         }
         try {
             List<Comment> Comments = new ArrayList<>();
-            Comment comment = new Comment(0, pitOutput)
+            Comment comment = new Comment(0, pitOutput);
             Comments.add(Comment);
-            }
             return violations;
         } catch (IOException e) {
             throw new PitException("Error when appending...", e);
