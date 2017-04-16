@@ -15,7 +15,7 @@ class PitProcessor extends ProcessorRunningExternalProcess {
     private PitExecutor pitExecutor;
     private PitResultParser pitResultParser;
 
-    PitProcessor(Configuration configuration) {
+    public PitProcessor(Configuration configuration) {
         pitExecutor = new PitExecutor(configuration.getProperty(GeneralOption.PIT_FILTER));
         pitResultParser = new PitResultParser();
     }

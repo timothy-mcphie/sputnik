@@ -11,7 +11,7 @@ public class PitProcessorFactory implements ReviewProcessorFactory<PitProcessor>
     }
 
     @Override
-    public pitProcessor create(Configuration configuration) {
+    public PitProcessor create(Configuration configuration) {
         return new pitProcessor(configuration);
     }
 }
