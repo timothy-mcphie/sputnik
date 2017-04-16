@@ -4,8 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import pl.touk.sputnik.processor.tools.externalprocess.ExternalProcessResultParser;
-import pl.touk.sputnik.review.Severity;
-import pl.touk.sputnik.review.Violation;
+import pl.touk.sputnik.review.Comment;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ class PitResultParser implements ExternalProcessResultParser {
 
     @Override
     public List<Violation> parse(String pitOutput) {
-        if (StringUtils.isEmpty(pylintOutput)) {
+        if (StringUtils.isEmpty(pitOutput)) {
             return Collections.emptyList();
         }
         try {

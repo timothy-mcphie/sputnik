@@ -29,8 +29,8 @@ class PitExecutor {
         List<String> basicPitArgs = ImmutableList.of("python", 
                 PIT_EXECUTABLE
                 );
-        List<String> rcfileNameArg = getRcfileNameAsList();
-        List<String> allArgs = Lists.newArrayList(Iterables.concat(basicPylintArgs, rcfileNameArg, filePathArg));
+        List<String> pitFilterNameArg = getPitFilterAsList();
+        List<String> allArgs = Lists.newArrayList(Iterables.concat(basicPylintArgs, pitFilterNameArg));
         return allArgs.toArray(new String[allArgs.size()]);
     }
 
