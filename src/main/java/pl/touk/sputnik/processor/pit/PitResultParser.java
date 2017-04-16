@@ -16,7 +16,7 @@ class PitResultParser implements ExternalProcessResultParser {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public List<Violation> parse(String pitOutput) {
+    public List<Comment> parse(String pitOutput) {
         if (StringUtils.isEmpty(pitOutput)) {
             return Collections.emptyList();
         }
