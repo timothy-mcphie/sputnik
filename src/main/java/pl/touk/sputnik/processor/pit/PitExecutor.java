@@ -12,7 +12,7 @@ import java.util.List;
 
 @Slf4j
 class PitExecutor {
-    private static final String PIT_EXECUTABLE = "/opt/sputnik/bin/sputnik_pit.py";
+    private static final String PIT_EXECUTABLE = "/opt/sputnik/pit_diff_tool/sputnik_pit.py";
 
     private String pitFilter;
 
