@@ -49,11 +49,11 @@ public class VisitorBuilder {
     }
 
     @NotNull
-    public List<AfterReviewVisitor> buildAfterReviewVisitors(Configuration configuration) {
+    public List<AfterReviewVisitor> buildAfterReviewVisitors(String pitResult, Configuration configuration) {
         List<AfterReviewVisitor> afterReviewVisitors = new ArrayList<>();
 
-        String passingComment = configuration.getProperty(GeneralOption.MESSAGE_SCORE_PASSING_COMMENT);
-        afterReviewVisitors.add(new SummaryMessageVisitor(passingComment));
+        //String passingComment = configuration.getProperty(GeneralOption.MESSAGE_SCORE_PASSING_COMMENT);
+        afterReviewVisitors.add(new SummaryMessageVisitor(pitResult));
 
         int maxNumberOfComments = NumberUtils.toInt(configuration.getProperty(GeneralOption.MAX_NUMBER_OF_COMMENTS), 0);
         if (maxNumberOfComments > 0) {

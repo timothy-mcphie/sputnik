@@ -16,7 +16,7 @@ public class ReviewRunner {
     private static final long THOUSAND = 1000L;
     @NotNull private final Review review;
 
-    public void review(@NotNull ReviewProcessor processor) {
+    public String review(@NotNull ReviewProcessor processor) {
         log.info("Review started for processor {}", processor.getName());
         long start = System.currentTimeMillis();
         ReviewResult reviewResult = null;
@@ -32,9 +32,12 @@ public class ReviewRunner {
 
         if (reviewResult == null) {
             log.warn("Review for processor {} returned empty review", processor.getName());
+            return null;
         } else {
             log.info("Review for processor {} returned {} violations", processor.getName(), reviewResult.getViolations().size());
+            String pitResult = reviewResult.getViolations().get(0).getMessage();
             review.add(processor.getName(), reviewResult);
+            return pitResult;
         }
     }
 }

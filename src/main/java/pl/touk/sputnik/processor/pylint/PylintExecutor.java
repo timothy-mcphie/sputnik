@@ -36,9 +36,6 @@ class PylintExecutor {
     }
 
     private List<String> getPitFilterAsList() {
-        if (rcfileName == null) {
-            return ImmutableList.of();
-        }
         return ImmutableList.of(pitFilter);
     }
 }

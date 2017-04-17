@@ -29,7 +29,9 @@ class PylintResultParser implements ExternalProcessResultParser {
             return Collections.emptyList();
         }
         List<Violation> violations = new ArrayList<>();
-        Violation violation = new Violation(" ", 1, pylintOutput, PYLINT_ERROR);
+	System.out.println(pylintOutput);
+	System.out.println("Adding violation");
+        Violation violation = new Violation(" ", 1, pylintOutput, Severity.INFO);
         violations.add(violation);
         return violations;
     }
@@ -42,17 +44,4 @@ class PylintResultParser implements ExternalProcessResultParser {
         return message.getMessage() + " [" + message.getSymbol() + "]";
     }
 
-    private Severity pylintMessageTypeToSeverity(String message, String messageType) {
-        if (PYLINT_ERROR.equals(messageType)) {
-            return Severity.ERROR;
-        } else if (PYLINT_WARNING.equals(messageType)) {
-            return Severity.WARNING;
-        } else if (PYLINT_CONVENTION.equals(messageType) || PYLINT_REFACTOR.equals(messageType)) {
-            return Severity.INFO;
-        } else if (PYLINT_FATAL.equals(messageType)) {
-            throw new PylintException("Fatal error from pylint (" + message + ")");
-        } else {
-            throw new PylintException("Unknown message type returned by pylint (type = " + messageType + ")");
-        }
-    }
 }

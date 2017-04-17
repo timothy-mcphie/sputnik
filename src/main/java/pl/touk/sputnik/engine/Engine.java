@@ -34,13 +34,14 @@ public class Engine {
             beforeReviewVisitor.beforeReview(review);
         }
 
+        String pitResult = "PLACE";
         List<ReviewProcessor> processors = ProcessorBuilder.buildProcessors(config);
         ReviewRunner reviewRunner = new ReviewRunner(review);
         for (ReviewProcessor processor : processors) {
-            reviewRunner.review(processor);
+            pitResult = reviewRunner.review(processor);
         }
 
-        for (AfterReviewVisitor afterReviewVisitor : new VisitorBuilder().buildAfterReviewVisitors(config)) {
+        for (AfterReviewVisitor afterReviewVisitor : new VisitorBuilder().buildAfterReviewVisitors(pitResult, config)) {
             afterReviewVisitor.afterReview(review);
         }
 

@@ -12,7 +12,7 @@ public enum GeneralOption implements ConfigurationOption {
     BUILD_TOOL("project.build.tool", "Build tool: <maven|gradle>", BuildTool.MAVEN.getName()),
 
     PROCESS_TEST_FILES("global.processTestFiles", "Process test files?", "true"),
-    MAX_NUMBER_OF_COMMENTS("global.maxNumberOfComments", "Maximum number of comments to submit", "0"),
+    MAX_NUMBER_OF_COMMENTS("global.maxNumberOfComments", "Maximum number of comments to submit", "1"),
     COMMENT_ONLY_CHANGED_LINES("global.commentOnlyChangedLines", "Comment only changed lines and context", "false"),
 
     MESSAGE_COMMENT_FORMAT("message.commentFormat", "Sputnik comment format. {0}: reporter, {1}: level, {2}: message", "[{0}] {1}: {2}"),

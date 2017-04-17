@@ -68,18 +68,11 @@ public class Review {
     }
 
     public void addError(String source, Violation violation) {
-        for (ReviewFile file : files) {
-            if (file.getReviewFilename().equals(violation.getFilenameOrJavaClassName())
-                    || file.getIoFile().getAbsolutePath().equals(violation.getFilenameOrJavaClassName())
-                    || file.getJavaClassName().equals(violation.getFilenameOrJavaClassName())) {
-                addError(file, source, violation.getLine(), violation.getMessage(), violation.getSeverity());
-                return;
-            }
-        }
-        log.warn("Filename or Java class {} was not found in current review", violation.getFilenameOrJavaClassName());
+        //addError(file, source, violation.getLine(), violation.getMessage(), violation.getSeverity());
+        return;
     }
 
-    private void addError(@NotNull ReviewFile reviewFile, @NotNull String source, int line, @Nullable String message, Severity severity) {
+    private void addError(ReviewFile reviewFile, @NotNull String source, int line, @Nullable String message, Severity severity) {
         reviewFile.getComments().add(new Comment(line, formatter.formatComment(source, severity, message)));
         incrementCounters(severity);
     }
