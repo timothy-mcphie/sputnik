@@ -23,7 +23,7 @@ pit.path=path/to/sputnik_pit.py
 
 ## Pit/Sputnik Specific Installation steps
 
-- See `pit_diff_tool` for further documentation on installing and using `sputnik_pit.py` tool in conjunction with the `pit_diff` package.
+- See [pit_diff_tool](https://github.com/timothy-mcphie/pit_diff_tool) for further documentation on installing and using `sputnik_pit.py` tool in conjunction with the `pit_diff` package.
 - Use the same installation instructions as below (building with gradle)
 - The configuration tool has three pit specific args. pit.enabled defaults to true, and pit.path defaults to a default path for the `sputnik_pit.py` script which is `/opt/sputnik/pit_diff_tool/sputnik_pit.py`
 - pit.filter is MANDATORY, this is the package filter used to specify which classes and tests pit will be mutating/using. If it is two general, eg org.*, pit attempts to mutate itself and will be unsuccessful, supply a fully qualified package name followed by the kleene star eg org.apache.commons.collections4.*
