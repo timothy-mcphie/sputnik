@@ -15,9 +15,15 @@ class PylintExecutor {
     private static final String PIT_EXECUTABLE = "/opt/sputnik/pit_diff_tool/sputnik_pit.py";
 
     private String pitFilter;
+    private String pitPath;
 
-    PylintExecutor(@Nullable String pitFilter) {
+    PylintExecutor(String pitPath, @Nullable String pitFilter) {
         this.pitFilter = pitFilter;
+        if (pitPath.equals("")) {
+            this.pitPath = PIT_EXECUTABLE;
+        } else {
+            this.pitPath = pitPath;
+        }
     }
 
     String runOnFile(String filePath) {
@@ -28,7 +34,7 @@ class PylintExecutor {
     @NotNull
     private String[] buildParams() {
         List<String> basicPitArgs = ImmutableList.of("python", 
-                PIT_EXECUTABLE
+                pitPath
                 );
         List<String> pitFilterNameArg = getPitFilterAsList();
         List<String> allArgs = Lists.newArrayList(Iterables.concat(basicPitArgs, pitFilterNameArg));

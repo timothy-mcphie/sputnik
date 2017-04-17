@@ -41,6 +41,7 @@ public enum GeneralOption implements ConfigurationOption {
 
     PIT_ENABLED("pit.enabled", "Pitest enabled", "true"),
     PIT_FILTER("pit.filter", "Pitest filter for package to mutate", ""), 
+    PIT_PATH("pit.path", "Path to the sputnik_pit binary", ""),
 
     PMD_ENABLED("pmd.enabled", "PMD enabled", "false"),
     PMD_RULESETS("pmd.ruleSets", "PMD rule sets", "rulesets/java/basic.xml"),

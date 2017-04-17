@@ -18,7 +18,7 @@ class PylintProcessor extends ProcessorRunningExternalProcess {
     private PylintResultParser pylintResultParser;
 
     PylintProcessor(Configuration configuration) {
-        pylintExecutor = new PylintExecutor(configuration.getProperty(GeneralOption.PIT_FILTER));
+        pylintExecutor = new PylintExecutor(configuration.getProperty(GeneralOption.PIT_PATH), configuration.getProperty(GeneralOption.PIT_FILTER));
         pylintResultParser = new PylintResultParser();
     }
 
