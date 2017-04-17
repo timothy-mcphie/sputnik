@@ -31,6 +31,7 @@ class PitProcessor extends ProcessorRunningExternalProcess {
         for (Violation violation : getParser().parse(processFileAndDumpOutput(""))) {
                 result.add(violation);
             }
+    }
 
     @NotNull
     @Override
