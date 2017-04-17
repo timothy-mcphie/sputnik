@@ -7,6 +7,7 @@ import pl.touk.sputnik.processor.ReviewProcessorFactory;
 public class PitProcessorFactory implements ReviewProcessorFactory<PitProcessor> {
     @Override
     public boolean isEnabled(Configuration configuration) {
+        System.out.println("Are we enabled?");
         return Boolean.valueOf(configuration.getProperty(GeneralOption.PIT_ENABLED));
     }
 

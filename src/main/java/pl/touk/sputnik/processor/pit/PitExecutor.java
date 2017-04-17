@@ -20,7 +20,7 @@ class PitExecutor {
         this.pitFilter = pitFilter;
     }
 
-    String runOnFile(String filePath) {
+    String runPitScript() {
         return new ExternalProcess().executeCommand(buildParams());
     }
 

@@ -23,6 +23,15 @@ class PitProcessor extends ProcessorRunningExternalProcess {
         pitResultParser = new PitResultParser();
     }
 
+    @Override
+    @NotNull
+    //We override the process to get a list of files and return a review result
+    public ReviewResult process(@NotNull Review review) {
+        ReviewResult result = new ReviewResult();
+        for (Violation violation : getParser().parse(processFileAndDumpOutput(""))) {
+                result.add(violation);
+            }
+
     @NotNull
     @Override
     public String getName() {
@@ -32,6 +41,7 @@ class PitProcessor extends ProcessorRunningExternalProcess {
     @Override
     public FileFilter getReviewFileFilter() {
         return new PythonFilter();
+//shouldn't matter -> only trying to force python script to return a large comment, not to be put on actual reviewfiles.
     }
 
     @Override
@@ -41,6 +51,6 @@ class PitProcessor extends ProcessorRunningExternalProcess {
 
     @Override
     public String processFileAndDumpOutput(File fileToReview) {
-        return pitExecutor.runOnFile(fileToReview.getAbsolutePath());
+        return pitExecutor.runPitScript();
     }
 }
