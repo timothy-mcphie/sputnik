@@ -28,21 +28,10 @@ class PylintResultParser implements ExternalProcessResultParser {
         if (StringUtils.isEmpty(pylintOutput)) {
             return Collections.emptyList();
         }
-        try {
-            List<Violation> violations = new ArrayList<>();
-            List<PylintMessage> messages = objectMapper.readValue(removeHeaderFromPylintOutput(pylintOutput),
-                    new TypeReference<List<PylintMessage>>() { });
-            for (PylintMessage message : messages) {
-                Violation violation = new Violation(message.getPath(),
-                        message.getLine(),
-                        formatViolationMessageFromPylint(message),
-                        pylintMessageTypeToSeverity(message.getMessage(), message.getType()));
-                violations.add(violation);
-            }
-            return violations;
-        } catch (IOException e) {
-            throw new PylintException("Error when converting from json format", e);
-        }
+        List<Violation> violations = new ArrayList<>();
+        Violation violation = new Violation(" ", 1, pylintOutput, PYLINT_ERROR);
+        violations.add(violation);
+        return violations;
     }
 
     private String removeHeaderFromPylintOutput(String pylintOutput) {

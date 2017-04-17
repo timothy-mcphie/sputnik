@@ -12,36 +12,33 @@ import java.util.List;
 
 @Slf4j
 class PylintExecutor {
-    private static final String PYLINT_EXECUTABLE = "pylint";
-    private static final String PYLINT_OUTPUT_FORMAT = "--output-format=json";
-    private static final String PYLINT_RCFILE_NAME = "--rcfile=";
+    private static final String PIT_EXECUTABLE = "/opt/sputnik/pit_diff_tool/sputnik_pit.py";
 
-    private String rcfileName;
+    private String pitFilter;
 
-    PylintExecutor(@Nullable String rcfileName) {
-        this.rcfileName = rcfileName;
+    PylintExecutor(@Nullable String pitFilter) {
+        this.pitFilter = pitFilter;
     }
 
     String runOnFile(String filePath) {
         log.info("Review on file: " + filePath);
-        return new ExternalProcess().executeCommand(buildParams(filePath));
+        return new ExternalProcess().executeCommand(buildParams());
     }
 
     @NotNull
-    private String[] buildParams(String filePath) {
-        List<String> basicPylintArgs = ImmutableList.of(
-                PYLINT_EXECUTABLE,
-                PYLINT_OUTPUT_FORMAT);
-        List<String> rcfileNameArg = getRcfileNameAsList();
-        List<String> filePathArg = ImmutableList.of(filePath);
-        List<String> allArgs = Lists.newArrayList(Iterables.concat(basicPylintArgs, rcfileNameArg, filePathArg));
+    private String[] buildParams() {
+        List<String> basicPitArgs = ImmutableList.of("python", 
+                PIT_EXECUTABLE
+                );
+        List<String> pitFilterNameArg = getPitFilterAsList();
+        List<String> allArgs = Lists.newArrayList(Iterables.concat(basicPitArgs, pitFilterNameArg));
         return allArgs.toArray(new String[allArgs.size()]);
     }
 
-    private List<String> getRcfileNameAsList() {
+    private List<String> getPitFilterAsList() {
         if (rcfileName == null) {
             return ImmutableList.of();
         }
-        return ImmutableList.of(PYLINT_RCFILE_NAME + rcfileName);
+        return ImmutableList.of(pitFilter);
     }
 }

@@ -18,14 +18,14 @@ class PylintProcessor extends ProcessorRunningExternalProcess {
     private PylintResultParser pylintResultParser;
 
     PylintProcessor(Configuration configuration) {
-        pylintExecutor = new PylintExecutor(configuration.getProperty(GeneralOption.PYLINT_RCFILE));
+        pylintExecutor = new PylintExecutor(configuration.getProperty(GeneralOption.PIT_FILTER));
         pylintResultParser = new PylintResultParser();
     }
 
     @NotNull
     @Override
     public String getName() {
-        return "Pylint";
+        return "Pit";
     }
 
     @Override
@@ -40,6 +40,6 @@ class PylintProcessor extends ProcessorRunningExternalProcess {
 
     @Override
     public String processFileAndDumpOutput(File fileToReview) {
-        return pylintExecutor.runOnFile(fileToReview.getAbsolutePath());
+        return pylintExecutor.runOnFile(" ");
     }
 }

@@ -7,7 +7,7 @@ import pl.touk.sputnik.processor.ReviewProcessorFactory;
 public class PylintProcessorFactory implements ReviewProcessorFactory<PylintProcessor> {
     @Override
     public boolean isEnabled(Configuration configuration) {
-        return Boolean.valueOf(configuration.getProperty(GeneralOption.PYLINT_ENABLED));
+        return Boolean.valueOf(configuration.getProperty(GeneralOption.PIT_ENABLED));
     }
 
     @Override

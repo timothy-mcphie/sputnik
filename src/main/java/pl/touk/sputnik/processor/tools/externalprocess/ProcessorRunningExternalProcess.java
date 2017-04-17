@@ -17,12 +17,16 @@ public abstract class ProcessorRunningExternalProcess implements ReviewProcessor
     @NotNull
     public ReviewResult process(@NotNull Review review) {
         ReviewResult result = new ReviewResult();
-        List<File> files = review.getFiles(getReviewFileFilter(), new IOFileTransformer());
+        //List<File> files = review.getFiles(getReviewFileFilter(), new IOFileTransformer());
+        /*
         for (File file : files) {
             for (Violation violation : getParser().parse(processFileAndDumpOutput(file))) {
                 result.add(violation);
             }
         }
+        */
+        File file = null;
+        result.add(getParser().parse(processFileAndDumpOutput(file)));
         return result;
     }
 
