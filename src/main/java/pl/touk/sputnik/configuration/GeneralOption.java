@@ -39,7 +39,7 @@ public enum GeneralOption implements ConfigurationOption {
     CHECKSTYLE_ENABLED("checkstyle.enabled", "Checkstyle enabled", "false"),
     CHECKSTYLE_CONFIGURATION_FILE("checkstyle.configurationFile", "Checkstyle configuration file", "sun_checks.xml"),
 
-    PIT_ENABLED("pit.enabled", "Pitest enabled", "false"),
+    PIT_ENABLED("pit.enabled", "Pitest enabled", "true"),
     PIT_FILTER("pit.filter", "Pitest filter for package to mutate", ""), 
 
     PMD_ENABLED("pmd.enabled", "PMD enabled", "false"),
