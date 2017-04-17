@@ -8,6 +8,9 @@ import pl.touk.sputnik.processor.tools.externalprocess.ExternalProcessResultPars
 import pl.touk.sputnik.processor.tools.externalprocess.ProcessorRunningExternalProcess;
 import pl.touk.sputnik.review.filter.FileFilter;
 import pl.touk.sputnik.review.filter.PythonFilter;
+import pl.touk.sputnik.review.Review;
+import pl.touk.sputnik.review.ReviewResult;
+import pl.touk.sputnik.review.Violation;
 
 import java.io.File;
 
@@ -31,6 +34,7 @@ class PitProcessor extends ProcessorRunningExternalProcess {
         for (Violation violation : getParser().parse(processFileAndDumpOutput(""))) {
                 result.add(violation);
             }
+	return result;
     }
 
     @NotNull
@@ -49,6 +53,10 @@ class PitProcessor extends ProcessorRunningExternalProcess {
     public ExternalProcessResultParser getParser() {
         return pitResultParser;
     }
+
+    public String processFileAndDumpOutput(String string) {
+        return pitExecutor.runPitScript();
+	}
 
     @Override
     public String processFileAndDumpOutput(File fileToReview) {

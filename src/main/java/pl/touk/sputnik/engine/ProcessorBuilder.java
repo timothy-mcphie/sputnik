@@ -20,6 +20,7 @@ public class ProcessorBuilder {
         Iterator<ReviewProcessorFactory> iterator = loader.iterator();
         while (iterator.hasNext()) {
             ReviewProcessorFactory factory = iterator.next();
+	    System.out.println(factory);
             if (factory.isEnabled(configuration)) {
                 processors.add(factory.create(configuration));
             }

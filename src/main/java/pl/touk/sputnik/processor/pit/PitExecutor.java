@@ -31,7 +31,7 @@ class PitExecutor {
                 );
         List<String> pitFilterNameArg = getPitFilterAsList();
         List<String> allArgs = Lists.newArrayList(Iterables.concat(basicPitArgs, pitFilterNameArg));
-        return allArgs.toArray(new String[allArgs.size()]);
+        return basicPitArgs.toArray(new String[allArgs.size()]);
     }
 
     private List<String> getPitFilterAsList() {
