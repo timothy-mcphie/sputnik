@@ -10,7 +10,7 @@
 
 ## Usage
 
-Sputnik runs Checkstyle, PMD, FindBugs, CodeNarc, JSHint (or JSLint), TSLint and Sonar only on files affected by Gerrit's patchset. It collects all violations and report them back to Gerrit or Stash.
+This version of Sputnik runs pitest on a build passed to CI.
 
 Typical configuration file looks like this:
 
@@ -24,29 +24,18 @@ connector.password=PassWd
 connector.useHttps=false
 pit.enabled=true
 pit.filter=package.to.mutate.*
-checkstyle.enabled=true
-checkstyle.configurationFile=sun_checks.xml
-checkstyle.propertiesFile=
-pmd.enabled=true
-pmd.ruleSets=rulesets/java/android.xml,rulesets/java/basic.xml
-findbugs.enabled=true
-findbugs.includeFilter=
-findbugs.excludeFilter=
-codenarc.enabled=true
-codenarc.ruleSets=
-codenarc.excludes=**/*.java
-jslint.enabled=false
-jshint.enabled=true
-jshint.configurationFile=jshint.json
-tslint.enabled=true
-tslint.script=/usr/bin/tslint
-tslint.configurationFile=tslint.json
-sonar.enabled=true
-sonar.configurationFiles=sonar-project.properties, sonar-runner.properties
-sonar.verbose=false
-```
+pit.path=path/to/sputnik_pit.py```
 
 If you want sputnik to use your SonarQube rules just download them from your SonarQube profile and use these with `checkstyle.configurationFile`, `pmd.ruleSets` and `findbugs.includeFilter` variables.
+
+## Pit/Sputnik Specific Installation steps
+
+- See `pit_diff_tool` for further documentation on installing and using `sputnik_pit.py` tool in conjunction with the `pit_diff` package.
+- Use the same installation instructions as below (building with gradle)
+- The configuration tool has three pit specific args. pit.enabled defaults to true, and pit.path defaults to a default path for the `sputnik_pit.py` script which is `/opt/sputnik/pit_diff_tool/sputnik_pit.py`
+- pit.filter is MANDATORY, this is the package filter used to specify which classes and tests pit will be mutating/using. If it is two general, eg org.*, pit attempts to mutate itself and will be unsuccessful, supply a fully qualified package name followed by the kleene star eg org.apache.commons.collections4.*
+- Currently this version of sputnik is only configure to support running Pit and extracting the pit\_diff, use with other tools enabled at own risk - currently unstable.
+- As stated before, this pit/sputnik version slots in after a Jenkins build has occurred (only tested on Jenkins). For mutation reports to persist on the CI server (enabling diffs to be run), the build must be checked out on jenkins to a local directory, not a workspace which is cleaned. A path can be specified with Check out to a sub directory in the Advanced section of the Source Code Management when configuring a Jenkins project.
 
 ## Installation
 
