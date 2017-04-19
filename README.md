@@ -2,9 +2,11 @@
 
 > Static code review for your Gerrit and Stash patchsets.
 
+This version of Sputnik runs pitest on a build passed to CI.
+Note, currently this version of sputnik is only configured to support running Pitest and extracting the pit\_diff. Using with other tools enabled is currently unstable.
+
 ## Usage
 
-This version of Sputnik runs pitest on a build passed to CI.
 
 Typical configuration file looks like this:
 
@@ -21,15 +23,17 @@ pit.filter=package.to.mutate.*
 pit.path=path/to/sputnik_pit.py
 ```
 
-## Pit/Sputnik Specific Installation steps
+
+- The configuration tool has three pit specific args. pit.enabled defaults to true, and pit.path defaults to a default path for the `sputnik_pit.py` script which is `/opt/sputnik/pit_diff_tool/sputnik_pit.py`
+- pit.filter is MANDATORY, this is the package filter used to specify which classes and tests pit will be mutating/using. If it is two general, eg org.\*, pit attempts to mutate itself and will be unsuccessful, supply a fully qualified package name followed by the kleene star eg org.apache.commons.collections4.\*
+
+## Pit/Sputnik Specific Requirements
 
 - See [pit_diff_tool](https://github.com/timothy-mcphie/pit_diff_tool) for further documentation on installing and using `sputnik_pit.py` tool in conjunction with the `pit_diff` package.
 - Use the same installation instructions as below (building with gradle)
-- The configuration tool has three pit specific args. pit.enabled defaults to true, and pit.path defaults to a default path for the `sputnik_pit.py` script which is `/opt/sputnik/pit_diff_tool/sputnik_pit.py`
-- pit.filter is MANDATORY, this is the package filter used to specify which classes and tests pit will be mutating/using. If it is two general, eg org.\*, pit attempts to mutate itself and will be unsuccessful, supply a fully qualified package name followed by the kleene star eg org.apache.commons.collections4.\*
-- Currently this version of sputnik is only configure to support running Pit and extracting the pit\_diff, use with other tools enabled at own risk - currently unstable.
-- As stated before, this pit/sputnik version slots in after a Jenkins build has occurred (only tested on Jenkins). For mutation reports to persist on the CI server (enabling diffs to be run), the build must be checked out on jenkins to a local directory, not a workspace which is cleaned. A path can be specified with Check out to a sub directory in the Advanced section of the Source Code Management when configuring a Jenkins project. Both this and the option, Use Custom Workspace in the General section of project configuration, pointing to the same paths, must be used. Due to these options, prepending the maven goal `clean` before your normal build step typically `test` is recommended to as closely emulate the CI fresh workspace for each build.
-- Finally, for simplicity `pit_diff` only supports maven builds currently, so gerrit projects must be maven based.
+- This pit/sputnik version slots in after a Jenkins build has occurred (only tested on Jenkins). For mutation reports to persist on the CI server (enabling diffs to be run), the build must be checked out on jenkins to a local directory, not a workspace which is cleaned. A path can be specified with Check out to a sub directory in the Advanced section of the Source Code Management when configuring a Jenkins project. Both this and the option, Use Custom Workspace in the General section of project configuration, pointing to the same paths, must be used. Due to these options, prepending the maven goal `clean` before your normal build step typically `test` is recommended to as closely emulate the CI fresh workspace for each build.
+- `pit_diff` curently only supports maven builds
+- The following jars are hard coded for use by sputnik_pit and must be placed in `/opt/sputnik/pit_diff_tool/lib` (this can be changed on line 22 of `sputnik_pit.py` in `pit_diff_tool`): `junit-4.11.jar, pitest-command-line-1.1.11.jar, pitest-1.1.11.jar `. They can all be found on maven central.
 
 ## Installation
 
